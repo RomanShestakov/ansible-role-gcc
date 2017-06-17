@@ -7,6 +7,7 @@
   with_items:
   - gcc
   - gcc-c++
+  - clang
   - make
   - openssl-devel
   when: ansible_os_family == "Centos"
