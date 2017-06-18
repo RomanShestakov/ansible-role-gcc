@@ -5,9 +5,10 @@
     name: "{{ item }}"
     state: present
   with_items:
-  - gcc
-  - gcc-c++
-  - clang
+  - gcc-devel
+  - gcc-c++-devel
+  - llvm-devel
+  - clang-devel
   - make
   - openssl-devel
   # when: ansible_os_family == "Centos"
