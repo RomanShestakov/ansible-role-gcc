@@ -10,5 +10,7 @@
   - llvm-devel
   - clang-devel
   - make
+  - htop
+  - strace
   - openssl-devel
   # when: ansible_os_family == "Centos"
