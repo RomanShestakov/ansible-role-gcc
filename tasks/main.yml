@@ -1,6 +1,6 @@
 # tasks/main.yml
 
-- name: Make sure the packages are installed (Fedora)
+- name: Install GCC and Clang
   yum:
     name: "{{ item }}"
     state: present
