@@ -10,4 +10,4 @@
   - clang
   - make
   - openssl-devel
-  when: ansible_os_family == "Centos"
+  # when: ansible_os_family == "Centos"
