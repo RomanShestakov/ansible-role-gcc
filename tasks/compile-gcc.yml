@@ -2,7 +2,7 @@
   get_url: url={{binutils_url}} dest={{binutils_tmp}} sha256sum={{binutils_sha256sum}} timeout=60
 
 - name: Extract binutils sources
-  unarchive: src={{binutils_tmp}} dest={{binutils_build}}
+  unarchive: src={{binutils_tmp}} dest="/tmp" creates={{binutils_build}}
 
 # - name: Configure binutils
 #   shell: chdir={{binutils_build}} ./configure --prefix={{binutils_install_dir}} --disable-nls --disable-werror
