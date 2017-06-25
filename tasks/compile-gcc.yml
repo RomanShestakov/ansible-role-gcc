@@ -1,11 +1,11 @@
 - name: Get binutils sources
-  get_url: url={{binutils_url}} dest={{binutils_tmp}} sha256sum={{binutils_sha256sum}}
+  get_url: url={{binutils_url}} dest={{binutils_tmp}}
 
-- name: Extract binutils sources
-  unarchive: src={{binutils_tmp}} dest={{binutils_build}}
+# - name: Extract binutils sources
+#   unarchive: src={{binutils_tmp}} dest={{binutils_build}}
 
-- name: Configure binutils
-  shell: chdir={{binutils_build}} ./configure --prefix={{binutils_install_dir}} --disable-nls --disable-werror
+# - name: Configure binutils
+#   shell: chdir={{binutils_build}} ./configure --prefix={{binutils_install_dir}} --disable-nls --disable-werror
 
 # - name: Configure binutils
 #   shell: chdir={{binutils_build}} ./configure --target={{target}} --prefix={{install_dir}} --disable-nls --disable-werror
