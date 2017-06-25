@@ -1,5 +1,21 @@
+# - name: Get binutils sources
+#   get_url: url={{binutils_url}} dest={{binutils_tmp}} sha256sum={{binutils_sha256sum}} timeout=60
+
 - name: Get binutils sources
-  get_url: url={{binutils_url}} dest={{binutils_tmp}} sha256sum={{binutils_sha256sum}} timeout=60
+  get_url: url=http://ftp.gnu.org/gnu/binutils/binutils-2.24.tar.gz dest=~/local/binutils-2.24.tar.gz sha256sum=4930b2886309112c00a279483eaef2f0f8e1b1b62010e0239c16b22af7c346d4
+
+- name: Extract binutils sources
+  unarchive: src=~/local/binutils-2.24.tar.gz dest=~/local/ creates=~/local/binutils-2.24
+
+- name: Configure binutils
+  shell: chdir=~/local/binutils-2.24 ./configure --target={{target}} --prefix={{install_dir}} --disable-nls --disable-werror
+
+- name: Make binutils
+  shell: chdir=~/local/binutils-2.24 make
+
+- name: Install binutils
+  shell: chdir=~/local/binutils-2.24 make install
+
 
 # - name: Extract binutils sources
 #   unarchive: src={{binutils_tmp}} dest={{binutils_build}}
