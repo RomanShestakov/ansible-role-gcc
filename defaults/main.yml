@@ -1,17 +1,7 @@
-# file: ansible-role-gcc/meta/main.yml
+# file: meta/main.yml
 
-galaxy_info:
-  author: ros
-  company: ANXS
-  description: Install gcc
-  min_ansible_version: 0.1
-  license: MIT
-  platforms:
-  - name: Centos
-    versions:
-    - all
-  categories:
-  - system
-
-dependencies:
-  - {role: ANXS.build-essential, tags: build-essential }
+binutils_url: "http://ftp.gnu.org/gnu/binutils/binutils-2.24.tar.gz"
+binutils_tmp: "/tmp/binutils-2.24.tar.gz"
+binutils_sha256sum=4930b2886309112c00a279483eaef2f0f8e1b1b62010e0239c16b22af7c346d4
+binutils_build: "/tmp/binutils-2.24"
+binutils_install_dir: "/opt/binutils-2.24"
