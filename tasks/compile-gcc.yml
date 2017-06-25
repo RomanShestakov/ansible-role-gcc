@@ -1,7 +1,11 @@
 - name: Get binutils sources
+  become: true
+  become_user: sudo
   get_url: url={{binutils_url}} dest={{binutils_tmp}} sha256sum={{binutils_sha256sum}} timeout=60
 
 - name: Extract binutils sources
+  become: true
+  become_user: sudo
   unarchive: src={{binutils_tmp}} dest="/tmp" creates={{binutils_build}}
 
 # - name: Configure binutils
