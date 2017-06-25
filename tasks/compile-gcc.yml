@@ -1,5 +1,5 @@
 - name: Get binutils sources
-  get_url: url={{binutils_url}} dest={{binutils_tmp}}
+  get_url: url={{binutils_url}} dest={{binutils_tmp}} sha256sum={{binutils_sha256sum}}
 
 # - name: Extract binutils sources
 #   unarchive: src={{binutils_tmp}} dest={{binutils_build}}
