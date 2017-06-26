@@ -10,17 +10,14 @@
   become: true
   shell: chdir={{binutils_build}} ./configure --prefix={{binutils_install_dir}} --disable-nls --disable-werror
 
-# - name: Configure binutils
-#   shell: chdir={{binutils_build}} ./configure --target={{target}} --prefix={{install_dir}} --disable-nls --disable-werror
+- name: Make binutils
+  shell: chdir={{binutils_build}}
 
-# - name: Make binutils
-#   shell: chdir=~/local/binutils-2.24 make
+- name: Install binutils
+  shell: chdir={{binutils_build}} make install
 
-# - name: Install binutils
-#   shell: chdir=~/local/binutils-2.24 make install
-
-# - name: wat
-#   debug: msg=ftp://ftp.fu-berlin.de/unix/languages/gcc/releases/gcc-{{gcc_version}}/gcc-{{gcc_version}}.tar.gz
+- name: wat
+  debug: msg=ftp://ftp.fu-berlin.de/unix/languages/gcc/releases/gcc-{{gcc_version}}/gcc-{{gcc_version}}.tar.gz
 
 # - name: Get GCC sources
 #   get_url: url=ftp://ftp.fu-berlin.de/unix/languages/gcc/releases/gcc-{{gcc_version}}/gcc-{{gcc_version}}.tar.gz dest=~/local/gcc-{{gcc_version}}.tar.gz sha256sum=5a46edbee29b6fed9006c02899db7cb7eff5f2d5837678484e1ff7da3b4beb6f
