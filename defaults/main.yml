@@ -9,4 +9,4 @@ binutils_install_dir: "/opt/binutils-2.24"
 gcc_version: 4.8
 gcc_url: "ftp://ftp.fu-berlin.de/unix/languages/gcc/releases/gcc-{{gcc_version}}/gcc-{{gcc_version}}.tar.gz"
 gcc_tmp: "/tmp/gcc-{{gcc_version}}.tar.gz"
-gcc_sha256sum: :sha256sum=5a46edbee29b6fed9006c02899db7cb7eff5f2d5837678484e1ff7da3b4beb6f:
+gcc_sha256sum: "sha256sum=5a46edbee29b6fed9006c02899db7cb7eff5f2d5837678484e1ff7da3b4beb6f"
