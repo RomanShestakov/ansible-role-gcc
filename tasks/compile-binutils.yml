@@ -11,7 +11,7 @@
   shell: chdir={{binutils_build}} ./configure --prefix={{binutils_install_dir}} --disable-nls --disable-werror
 
 - name: Make binutils
-  shell: chdir={{binutils_build}}
+  shell: chdir={{binutils_build}} make
 
 - name: Install binutils
   shell: chdir={{binutils_build}} make install
