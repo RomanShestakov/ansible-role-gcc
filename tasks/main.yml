@@ -1,5 +1,6 @@
 # tasks/main.yml
 
+- include: 'compile-binutils.yml'
 - include: 'compile-gcc.yml'
 
 # - name: Install GCC and Clang

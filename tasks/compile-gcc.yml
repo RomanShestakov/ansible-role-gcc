@@ -1,26 +1,26 @@
-- name: Get binutils sources
-  become: true
-  get_url: url={{binutils_url}} dest={{binutils_tmp}} sha256sum={{binutils_sha256sum}} timeout=60
+# - name: Get binutils sources
+#   become: true
+#   get_url: url={{binutils_url}} dest={{binutils_tmp}} sha256sum={{binutils_sha256sum}} timeout=60
 
-- name: Extract binutils sources
-  become: true
-  unarchive: src={{binutils_tmp}} dest="/tmp" creates={{binutils_build}} remote_src=yes
+# - name: Extract binutils sources
+#   become: true
+#   unarchive: src={{binutils_tmp}} dest="/tmp" creates={{binutils_build}} remote_src=yes
 
-- name: Configure binutils
-  become: true
-  shell: chdir={{binutils_build}} ./configure --prefix={{binutils_install_dir}} --disable-nls --disable-werror
+# - name: Configure binutils
+#   become: true
+#   shell: chdir={{binutils_build}} ./configure --prefix={{binutils_install_dir}} --disable-nls --disable-werror
 
-- name: Make binutils
-  shell: chdir={{binutils_build}}
+# - name: Make binutils
+#   shell: chdir={{binutils_build}}
 
-- name: Install binutils
-  shell: chdir={{binutils_build}} make install
+# - name: Install binutils
+#   shell: chdir={{binutils_build}} make install
 
-- name: wat
-  debug: msg=ftp://ftp.fu-berlin.de/unix/languages/gcc/releases/gcc-{{gcc_version}}/gcc-{{gcc_version}}.tar.gz
+# - name: wat
+#   debug: msg=ftp://ftp.fu-berlin.de/unix/languages/gcc/releases/gcc-{{gcc_version}}/gcc-{{gcc_version}}.tar.gz
 
-# - name: Get GCC sources
-#   get_url: url=ftp://ftp.fu-berlin.de/unix/languages/gcc/releases/gcc-{{gcc_version}}/gcc-{{gcc_version}}.tar.gz dest=~/local/gcc-{{gcc_version}}.tar.gz sha256sum=5a46edbee29b6fed9006c02899db7cb7eff5f2d5837678484e1ff7da3b4beb6f
+- name: Get GCC sources
+  get_url: url=gcc_url dest={{gcc_tmp}} sha256sum={{gcc_sha256sum}}
 
 # - name: Extract GCC sources
 #   unarchive: src=~/local/gcc-{{gcc_version}}.tar.gz dest=~/local/ creates=~/local/gcc-{{gcc_version}}
