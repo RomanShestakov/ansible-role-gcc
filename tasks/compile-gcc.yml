@@ -28,22 +28,29 @@
   unarchive: src={{gcc_tmp}} dest="/tmp" creates={{gcc_build}} remote_src=yes
 
 - name: Make gcc build folder
+  become: true
   file: path={{gcc_build_dir}} state=directory
 
 - name: Download GMP MPFR and MPC
+  become: true
   shell: chdir={{gcc_build}} ./contrib/download_prerequisites
 
 - name: Configure GCC
+  become: true
   shell: chdir={{gcc_build_dir}} {{gcc_build}}/configure --prefix={{gcc_install_dir}} --disable-nls --enable-languages=c --without-headers
 
 - name: Make GCC
+  become: true
   shell: chdir={{gcc_build_dir}} make all-gcc
 
 - name: Make libgcc
+  become: true
   shell: chdir={{gcc_build_dir}} make all-target-libgcc
 
 - name: Install GCC
+  become: true
   shell: chdir={{gcc_build_dir}} make install-gcc
 
 - name: Install libgcc
+  become: true
   shell: chdir={{gcc_build_dir}} make install-target-libgcc
