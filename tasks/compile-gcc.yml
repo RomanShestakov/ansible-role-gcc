@@ -20,25 +20,27 @@
 #   debug: msg=ftp://ftp.fu-berlin.de/unix/languages/gcc/releases/gcc-{{gcc_version}}/gcc-{{gcc_version}}.tar.gz
 
 - name: Get GCC sources
+  become: true
   get_url: url={{gcc_url}} dest={{gcc_tmp}} sha256sum={{gcc_sha256sum}}
 
-# - name: Extract GCC sources
-#   unarchive: src=~/local/gcc-{{gcc_version}}.tar.gz dest=~/local/ creates=~/local/gcc-{{gcc_version}}
+- name: Extract GCC sources
+  become: true
+  unarchive: src={{gcc_tmp}} dest="/tmp" creates={{gcc_build}} remote_src=yes
 
-# - name: Make gcc build folder
-#   file: path={{gcc_build_dir}} state=directory
+- name: Make gcc build folder
+  file: path={{gcc_build_dir}} state=directory
 
-# - name: Configure GCC
-#   shell: chdir={{gcc_build_dir}} ../gcc-{{gcc_version}}/configure --target={{target}} --prefix={{install_dir}} --disable-nls --enable-languages=c --without-headers
+- name: Configure GCC
+  shell: chdir={{gcc_build_dir}} {{gcc_build}}/configure --prefix={{gcc_install_dir}} --disable-nls --enable-languages=c --without-headers
 
-# - name: Make GCC
-#   shell: chdir={{gcc_build_dir}} make all-gcc
+- name: Make GCC
+  shell: chdir={{gcc_build_dir}} make all-gcc
 
-# - name: Make libgcc
-#   shell: chdir={{gcc_build_dir}} make all-target-libgcc
+- name: Make libgcc
+  shell: chdir={{gcc_build_dir}} make all-target-libgcc
 
-# - name: Install GCC
-#   shell: chdir={{gcc_build_dir}} make install-gcc
+- name: Install GCC
+  shell: chdir={{gcc_build_dir}} make install-gcc
 
-# - name: Install libgcc
-#   shell: chdir={{gcc_build_dir}} make install-target-libgcc
+- name: Install libgcc
+  shell: chdir={{gcc_build_dir}} make install-target-libgcc
