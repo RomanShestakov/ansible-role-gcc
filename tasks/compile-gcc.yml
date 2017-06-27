@@ -20,7 +20,7 @@
 #   debug: msg=ftp://ftp.fu-berlin.de/unix/languages/gcc/releases/gcc-{{gcc_version}}/gcc-{{gcc_version}}.tar.gz
 
 - name: Get GCC sources
-  get_url: url=gcc_url dest={{gcc_tmp}} sha256sum={{gcc_sha256sum}}
+  get_url: url={{gcc_url}} dest={{gcc_tmp}} sha256sum={{gcc_sha256sum}}
 
 # - name: Extract GCC sources
 #   unarchive: src=~/local/gcc-{{gcc_version}}.tar.gz dest=~/local/ creates=~/local/gcc-{{gcc_version}}
