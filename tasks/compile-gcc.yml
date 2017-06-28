@@ -21,7 +21,7 @@
 
 - name: Get GCC sources
   become: true
-  get_url: url={{gcc_url}} dest={{gcc_tmp}} sha256sum={{gcc_sha256sum}}
+  get_url: url={{gcc_url}} dest={{gcc_tmp}} sha256sum={{gcc_sha256sum}} timeout=180
 
 - name: Extract GCC sources
   become: true
