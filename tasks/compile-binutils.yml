@@ -6,15 +6,15 @@
   become: true
   unarchive: src={{binutils_tmp}} dest="/tmp" creates={{binutils_build}} remote_src=yes
 
-- name: Configure binutils
-  become: true
-  shell: chdir={{binutils_build}} ./configure --prefix={{binutils_install_dir}} --disable-nls --disable-werror
+# - name: Configure binutils
+#   become: true
+#   shell: chdir={{binutils_build}} ./configure --prefix={{binutils_install_dir}} --disable-nls --disable-werror
 
-- name: Make binutils
-  shell: chdir={{binutils_build}} make
+# - name: Make binutils
+#   shell: chdir={{binutils_build}} make
 
-- name: Install binutils
-  shell: chdir={{binutils_build}} make install
+# - name: Install binutils
+#   shell: chdir={{binutils_build}} make install
 
-- name: wat
-  debug: msg=ftp://ftp.fu-berlin.de/unix/languages/gcc/releases/gcc-{{gcc_version}}/gcc-{{gcc_version}}.tar.gz
+# - name: wat
+#   debug: msg=ftp://ftp.fu-berlin.de/unix/languages/gcc/releases/gcc-{{gcc_version}}/gcc-{{gcc_version}}.tar.gz

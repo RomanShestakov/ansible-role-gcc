@@ -35,6 +35,12 @@
   become: true
   shell: chdir={{gcc_build}} ./contrib/download_prerequisites
 
+- name: Symlink binutils
+  become: true
+  shell: ln -s {{binutils_build}}/* {{gcc_build}}
+  # file: src={{ item }} dest={{gcc_build}}/{{ item | basename }} state=link
+  # with_fileglob: {{binutils_build}}/*
+
 - name: Configure GCC
   become: true
   shell: chdir={{gcc_build_dir}} {{gcc_build}}/configure --prefix={{gcc_install_dir}} --disable-nls --enable-languages=c --without-headers
