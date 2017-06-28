@@ -37,7 +37,7 @@
 
 - name: Symlink binutils
   become: true
-  shell: ln -s {{binutils_build}}/* {{gcc_build}}
+  shell: ln -s -f {{binutils_build}}/* {{gcc_build}}/
   # file: src={{ item }} dest={{gcc_build}}/{{ item | basename }} state=link
   # with_fileglob: {{binutils_build}}/*
 
