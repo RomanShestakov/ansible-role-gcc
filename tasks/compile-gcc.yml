@@ -35,24 +35,9 @@
   become: true
   shell: chdir={{gcc_build}} ./contrib/download_prerequisites
 
-# - name: Symlink binutils
-#   become: true
-#   #shell: ln -s {{binutils_build}}/* {{gcc_build}}/
-#   shell: for file in {{binutils_build}}/* ; do ln -s "${file}" ; done
-#   # file: src={{ item }} dest={{gcc_build}}/{{ item | basename }} state=link
-#   # with_fileglob: {{binutils_build}}/*
-
-- name    : get files in /path/
-  shell   : ls {{binutils_build}}/*
-  register: path_files
-
-- name: fetch these back to the local Ansible host for backup purposes
-  file: src={{ item }} dest={{ gcc_build }}/{{ item | basename }} state=link
-  with_items: "{{ path_files.stdout_lines }}"
-
 - name: Configure GCC
   become: true
-  shell: chdir={{gcc_build_dir}} {{gcc_build}}/configure --prefix={{gcc_install_dir}} --disable-nls --enable-languages=c --without-headers
+  shell: chdir={{gcc_build_dir}} {{gcc_build}}/configure --prefix={{gcc_install_dir}} --disable-nls --enable-languages=c,c++
 
 - name: Make GCC
   become: true
