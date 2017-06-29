@@ -37,7 +37,7 @@
 
 - name: Configure GCC
   become: true
-  shell: chdir={{gcc_build_dir}} {{gcc_build}}/configure --prefix={{gcc_install_dir}} --disable-nls --enable-languages=c,c++
+  shell: chdir={{gcc_build_dir}} {{gcc_build}}/configure --target={{gcc_target}} --prefix={{gcc_install_dir}} --disable-nls --enable-languages=c,c++
 
 - name: Make GCC
   become: true

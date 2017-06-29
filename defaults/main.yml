@@ -13,3 +13,4 @@ gcc_sha256sum: "02f9302a559fa2251595ca0bc1e937219eff2995a3802d7b31676fec2402beb4
 gcc_build: "/tmp/gcc-{{gcc_version}}"
 gcc_build_dir: "/tmp/gcc-{{gcc_version}}-build"
 gcc_install_dir: "/opt/gcc-{{gcc_version}}"
+gcc_target: "x86_64-redhat-linux"
