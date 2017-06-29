@@ -11,9 +11,11 @@
   shell: chdir={{binutils_build}} ./configure --target={{gcc_target}} --prefix={{gcc_install_dir}} --disable-nls --disable-werror
 
 - name: Make binutils
+  become: true
   shell: chdir={{binutils_build}} make
 
 - name: Install binutils
+  become: true
   shell: chdir={{binutils_build}} make install
 
 - name: wat
