@@ -21,7 +21,7 @@
 
 - name: Get GCC sources
   become: true
-  get_url: url={{gcc_url}} dest={{gcc_tmp}} sha256sum={{gcc_sha256sum}} timeout=180
+  get_url: url={{gcc_url}} dest={{gcc_tmp}} timeout=180
 
 - name: Extract GCC sources
   become: true
@@ -37,7 +37,7 @@
 
 - name: Configure GCC
   become: true
-  shell: chdir={{gcc_build_dir}} {{gcc_build}}/configure --target={{gcc_target}} --prefix={{gcc_install_dir}} --disable-nls --enable-languages=c,c++
+  shell: chdir={{gcc_build_dir}} {{gcc_build}}/configure --prefix={{gcc_install_dir}} --disable-nls --enable-languages=c,c++ --disable-multilib
 
 - name: Make GCC
   become: true
