@@ -21,6 +21,7 @@
 - name: Make GCC
   become: true
   shell: chdir={{gcc_build_dir}} make all-gcc
+  register: command_result
   ignore_errors: True
 
 # - name: Make libgcc
