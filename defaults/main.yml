@@ -1,18 +1,41 @@
 # file: meta/main.yml
 
 
+# Binutils
 binutils_version: 2.24
 binutils_url: "http://ftp.gnu.org/gnu/binutils/binutils-{{binutils_version}}.tar.gz"
 binutils_tmp: "/tmp/binutils-{{binutils_version}}.tar.gz"
-# binutils_sha256sum: "4930b2886309112c00a279483eaef2f0f8e1b1b62010e0239c16b22af7c346d4"
 binutils_build: "/tmp/binutils-{{binutils_version}}"
-# binutils_install_dir: "/opt/binutils-2.24"
 
+# GCC
 gcc_version: 6.3.0
 gcc_url: "ftp://ftp.fu-berlin.de/unix/languages/gcc/releases/gcc-{{gcc_version}}/gcc-{{gcc_version}}.tar.gz"
 gcc_tmp: "/tmp/gcc-{{gcc_version}}.tar.gz"
-#gcc_sha256sum: "02f9302a559fa2251595ca0bc1e937219eff2995a3802d7b31676fec2402beb4"
 gcc_build: "/tmp/gcc-{{gcc_version}}"
 gcc_build_dir: "/tmp/gcc-{{gcc_version}}-build"
 gcc_install_dir: "/opt/gcc-{{gcc_version}}"
-#gcc_target: "x86_64-redhat-linux"
+
+# GMP
+gmp_version: 4.3.2
+gmp_url: "https://gmplib.org/download/gmp/gmp-{{gmp_version}}.tar.bz2"
+gmp_tmp: "/tmp/gmp-{{gmp_version}}.tar.bz2"
+
+# MPC
+mpc_version: 0.8.1
+mpc_url: "http://www.multiprecision.org/mpc/download/mpc-{{mpc_version}}.tar.gz"
+mpc_tmp: "/tmp/mpc-{{mpc_version}}.tar.gz"
+
+# MPFR
+mpfr_version: 2.4.2
+mpfr_url: "http://www.mpfr.org/mpfr-2.4.2/mpfr-{{mpfr_version}}.tar.bz2"
+mpfr_tmp: "/tmp/mpfr-{{mpfr_version}}.tar.bz2"
+
+# Cloog
+cloog_version: 0.18.1
+cloog_url: "ftp://gcc.gnu.org/pub/gcc/infrastructure/cloog-{{cloog_version}}.tar.gz"
+cloog_tmp: "/tmp/cloog-{{cloog_version}}.tar.gz"
+
+# ISL
+isl_version: 0.12.2
+isl_url: "ftp://gcc.gnu.org/pub/gcc/infrastructure/isl-{{isl_version}}.tar.bz2"
+isl_tmp: "/tmp/isl-{{isl_version}}.tar.bz2"

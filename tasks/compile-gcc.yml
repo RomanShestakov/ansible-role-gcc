@@ -10,9 +10,70 @@
   become: true
   file: path={{gcc_build_dir}} state=directory
 
-- name: Download GMP MPFR and MPC
+- name: Get GMP
   become: true
-  shell: chdir={{gcc_build}} ./contrib/download_prerequisites
+  get_url: url={{gmp_url}} dest={{gmp_tmp}} timeout=180
+
+- name: Extract GMP sources
+  become: true
+  unarchive: src={{gmp_tmp}} dest="{{gcc_build_dir}}" creates="gmp" remote_src=yes
+
+
+- name: Get MPC
+  become: true
+  get_url: url={{mpc_url}} dest={{mpc_tmp}} timeout=180
+
+- name: Extract GMP sources
+  become: true
+  unarchive: src={{mpc_tmp}} dest="{{gcc_build_dir}}" creates="mpc" remote_src=yes
+
+
+- name: Get MPFR
+  become: true
+  get_url: url={{mpfr_url}} dest={{mpfr_tmp}} timeout=180
+
+- name: Extract MPFR sources
+  become: true
+  unarchive: src={{mpfr_tmp}} dest="{{gcc_build_dir}}" creates="mpfr" remote_src=yes
+
+
+- name: Get Cloog
+  become: true
+  get_url: url={{cloog_url}} dest={{cloog_tmp}} timeout=180
+
+- name: Extract Cloog sources
+  become: true
+  unarchive: src={{cloog_tmp}} dest="{{gcc_build_dir}}" creates="cloog" remote_src=yes
+
+- name: Get ISL
+  become: true
+  get_url: url={{isl_url}} dest={{isl_tmp}} timeout=180
+
+- name: Extract ISL sources
+  become: true
+  unarchive: src={{isl_tmp}} dest="{{gcc_build_dir}}" creates="isl" remote_src=yes
+
+
+# - name: Extract MPFR sources
+#   become: true
+#   unarchive: src={{mpfr_tmp}} dest="{{gcc_build_dir}}" creates="mpfr" remote_src=yes
+
+# - name: Extract cloog sources
+#   become: true
+#   unarchive: src={{cloog_tmp}} dest="{{gcc_build_dir}}" creates="cloog" remote_src=yes
+
+# - name: Extract ISL sources
+#   become: true
+#   unarchive: src={{isl_tmp}} dest="{{gcc_build_dir}}" creates="isl" remote_src=yes
+
+# - name: Extract cloog sources
+#   become: true
+#   unarchive: src={{cloog_tmp}} dest="{{gcc_build_dir}}" creates="cloog" remote_src=yes
+
+
+# - name: Download GMP MPFR and MPC
+#   become: true
+#   shell: chdir={{gcc_build}} ./contrib/download_prerequisites
 
 - name: Configure GCC
   become: true
