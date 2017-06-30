@@ -43,14 +43,14 @@
   become: true
   shell: chdir={{gcc_build_dir}} make all-gcc
 
-- name: Make libgcc
-  become: true
-  shell: chdir={{gcc_build_dir}} make all-target-libgcc
+# - name: Make libgcc
+#   become: true
+#   shell: chdir={{gcc_build_dir}} make all-target-libgcc
 
 - name: Install GCC
   become: true
   shell: chdir={{gcc_build_dir}} make install-gcc
 
-- name: Install libgcc
-  become: true
-  shell: chdir={{gcc_build_dir}} make install-target-libgcc
+# - name: Install libgcc
+#   become: true
+#   shell: chdir={{gcc_build_dir}} make install-target-libgcc
