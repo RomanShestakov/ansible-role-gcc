@@ -29,12 +29,12 @@
 
 - name: Make GCC
   become: true
-  shell: chdir={{gcc_build_dir}} make all-gcc
+  shell: chdir={{gcc_build_dir}} make
   when: gcc_downloaded.changed
 
 - name: Install GCC
   become: true
-  shell: chdir={{gcc_build_dir}} make install-gcc
+  shell: chdir={{gcc_build_dir}} make install
   when: gcc_downloaded.changed
 
 # - name: Make libgcc
