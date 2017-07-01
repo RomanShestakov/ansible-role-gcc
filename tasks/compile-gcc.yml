@@ -26,7 +26,7 @@
 
 - name: Configure GMP
   become: true
-  shell: chdir={{gmp_build_dir}} configure \
+  shell: chdir={{gmp_build_dir}} {{gmp_build_dir}}/configure \
     --prefix={{gcc_build_dir}} \
     --disable-shared \
     --enable-static \
