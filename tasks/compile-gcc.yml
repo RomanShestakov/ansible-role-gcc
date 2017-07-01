@@ -24,7 +24,7 @@
 
 - name: Extract GMP sources
   become: true
-  unarchive: src={{gmp_tmp}} dest={{gmp_build_dir}} remote_src=yes
+  unarchive: src={{gmp_tmp}} dest=/tmp remote_src=yes
   # when: gmp_downloaded.changed
 
 - name: Configure GMP
@@ -52,7 +52,7 @@
 
 - name: Extract MPFR sources
   become: true
-  unarchive: src={{mpfr_tmp}} dest={{mpfr_build_dir}} remote_src=yes
+  unarchive: src={{mpfr_tmp}} dest=/tmp remote_src=yes
   # when: mpfr_downloaded.changed
 
 - name: Configure MPFR
@@ -68,7 +68,7 @@
 
 
 #### MPC
-- name: Get MCP
+- name: Get MPC
   become: true
   get_url: url={{mpc_url}} dest={{mpc_tmp}} timeout=180
   # register: mpc_downloaded
@@ -80,7 +80,7 @@
 
 - name: Extract MPC sources
   become: true
-  unarchive: src={{mpc_tmp}} dest={{mpc_build_dir}} remote_src=yes
+  unarchive: src={{mpc_tmp}} dest=/tmp remote_src=yes
   # when: mpc_downloaded.changed
 
 - name: Configure MPC
