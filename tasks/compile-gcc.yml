@@ -16,8 +16,7 @@
 
 - name: Extract GMP sources
   become: true
-  unarchive: src={{gmp_tmp}} dest="{{gcc_build_dir}}" creates="gmp" remote_src=yes
-
+  unarchive: src={{gmp_tmp}} dest="{{gcc_build}}" creates="gmp" remote_src=yes
 
 - name: Get MPC
   become: true
@@ -25,8 +24,7 @@
 
 - name: Extract GMP sources
   become: true
-  unarchive: src={{mpc_tmp}} dest="{{gcc_build_dir}}" creates="mpc" remote_src=yes
-
+  unarchive: src={{mpc_tmp}} dest="{{gcc_build}}" creates="mpc" remote_src=yes
 
 - name: Get MPFR
   become: true
@@ -34,8 +32,7 @@
 
 - name: Extract MPFR sources
   become: true
-  unarchive: src={{mpfr_tmp}} dest="{{gcc_build_dir}}" creates="mpfr" remote_src=yes
-
+  unarchive: src={{mpfr_tmp}} dest="{{gcc_build}}" creates="mpfr" remote_src=yes
 
 - name: Get Cloog
   become: true
@@ -43,7 +40,7 @@
 
 - name: Extract Cloog sources
   become: true
-  unarchive: src={{cloog_tmp}} dest="{{gcc_build_dir}}" creates="cloog" remote_src=yes
+  unarchive: src={{cloog_tmp}} dest="{{gcc_build}}" creates="cloog" remote_src=yes
 
 - name: Get ISL
   become: true
@@ -51,7 +48,7 @@
 
 - name: Extract ISL sources
   become: true
-  unarchive: src={{isl_tmp}} dest="{{gcc_build_dir}}" creates="isl" remote_src=yes
+  unarchive: src={{isl_tmp}} dest="{{gcc_build}}" creates="isl" remote_src=yes
 
 
 # - name: Extract MPFR sources
