@@ -29,7 +29,7 @@
 
 - name: Configure GMP
   become: true
-  shell: chdir={{gmp_build_dir}} ./configure --prefix={{gcc_build_dir}} --disable-shared  --enable-static
+  shell: chdir={{gmp_build_dir}} ./configure --prefix={{gcc_install_dir}} --disable-shared  --enable-static
   # when: gmp_downloaded.changed
 
 - name: Make GMP
@@ -57,7 +57,7 @@
 
 - name: Configure MPFR
   become: true
-  shell: chdir={{mpfr_build_dir}} ./configure --prefix={{gcc_build_dir}} --disable-shared  --enable-static --with-gmp={{gcc_build_dir}}
+  shell: chdir={{mpfr_build_dir}} ./configure --prefix={{gcc_build_dir}} --disable-shared  --enable-static --with-gmp={{gcc_install_dir}}
   # when: mpfr_downloaded.changed
 
 - name: Make MPFR
@@ -71,82 +71,28 @@
 - name: Get MCP
   become: true
   get_url: url={{mpc_url}} dest={{mpc_tmp}} timeout=180
-  register: mpc_downloaded
+  # register: mpc_downloaded
 
 - name: Make MPC build folder
   become: true
   file: path={{mpc_build_dir}} state=directory
-  when: mpc_downloaded.changed
+  # when: mpc_downloaded.changed
 
 - name: Extract MPC sources
   become: true
   unarchive: src={{mpc_tmp}} dest={{mpc_build_dir}} remote_src=yes
-  when: mpc_downloaded.changed
+  # when: mpc_downloaded.changed
 
 - name: Configure MPC
   become: true
-  shell: chdir={{mpc_build_dir}} ./configure --prefix={{gcc_build_dir}} --disable-shared  --enable-static --with-gmp={{gcc_build_dir}} --with-mpfr={{gcc_build_dir}}
-  when: mpc_downloaded.changed
+  shell: chdir={{mpc_build_dir}} ./configure --prefix={{gcc_install_dir}} --disable-shared  --enable-static --with-gmp={{gcc_install_dir}} --with-mpfr={{gcc_install_dir}}
+  # when: mpc_downloaded.changed
 
 - name: Make MPC
   become: true
   shell: chdir={{mpc_build_dir}} make && make check && make install
-  when: mpc_downloaded.changed
+  # when: mpc_downloaded.changed
 ##############
-
-
-
-# ####### MPC
-# - name: Get MPC
-#   become: true
-#   get_url: url={{mpc_url}} dest={{mpc_tmp}} timeout=180
-
-# - name: Extract GMP sources
-#   become: true
-#   unarchive: src={{mpc_tmp}} dest="/tmp" remote_src=yes
-
-# - name: Get MPFR
-#   become: true
-#   get_url: url={{mpfr_url}} dest={{mpfr_tmp}} timeout=180
-
-# - name: Extract MPFR sources
-#   become: true
-#   unarchive: src={{mpfr_tmp}} dest="/tmp" remote_src=yes
-
-
-
-# - name: Get Cloog
-#   become: true
-#   get_url: url={{cloog_url}} dest={{cloog_tmp}} timeout=180
-
-# - name: Extract Cloog sources
-#   become: true
-#   unarchive: src={{cloog_tmp}} dest="{{cloog_build}}" remote_src=yes
-
-# - name: Get ISL
-#   become: true
-#   get_url: url={{isl_url}} dest={{isl_tmp}} timeout=180
-
-# - name: Extract ISL sources
-#   become: true
-#   unarchive: src={{isl_tmp}} dest="{{isl_build}}" remote_src=yes
-
-
-# - name: Extract MPFR sources
-#   become: true
-#   unarchive: src={{mpfr_tmp}} dest="{{gcc_build_dir}}" creates="mpfr" remote_src=yes
-
-# - name: Extract cloog sources
-#   become: true
-#   unarchive: src={{cloog_tmp}} dest="{{gcc_build_dir}}" creates="cloog" remote_src=yes
-
-# - name: Extract ISL sources
-#   become: true
-#   unarchive: src={{isl_tmp}} dest="{{gcc_build_dir}}" creates="isl" remote_src=yes
-
-# - name: Extract cloog sources
-#   become: true
-#   unarchive: src={{cloog_tmp}} dest="{{gcc_build_dir}}" creates="cloog" remote_src=yes
 
 
 # - name: Download GMP MPFR and MPC
@@ -155,16 +101,16 @@
 
 - name: Configure GCC
   become: true
-  shell: chdir={{gcc_build_dir}} {{gcc_build}}/configure \
+  shell: chdir={{gcc_build_dir}} ./configure \
     --prefix={{gcc_install_dir}} \
     --disable-shared \
     --enable-static \
     --disable-nls \
     --enable-languages=c,c++ \
     --disable-multilib \
-    --with-gmp={{gcc_build_dir}} \
-    --with-mpfr={{gcc_build_dir}} \
-    --with-mpc={{gcc_build_dir}}
+    --with-gmp={{gcc_install_dir}} \
+    --with-mpfr={{gcc_install_dir}} \
+    --with-mpc={{gcc_install_dir}}
 
 - name: Make GCC
   become: true
