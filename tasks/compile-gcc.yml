@@ -25,9 +25,6 @@
     --disable-nls \
     --enable-languages=c,c++ \
     --disable-multilib
-    # --with-gmp={{gcc_install_dir}} \
-    # --with-mpfr={{gcc_install_dir}} \
-    # --with-mpc={{gcc_install_dir}}
   when: gcc_downloaded.changed
 
 - name: Make GCC
@@ -35,14 +32,14 @@
   shell: chdir={{gcc_build_dir}} make all-gcc
   when: gcc_downloaded.changed
 
-# - name: Make libgcc
-#   become: true
-#   shell: chdir={{gcc_build_dir}} make all-target-libgcc
-
 - name: Install GCC
   become: true
   shell: chdir={{gcc_build_dir}} make install-gcc
   when: gcc_downloaded.changed
+
+# - name: Make libgcc
+#   become: true
+#   shell: chdir={{gcc_build_dir}} make all-target-libgcc
 
 # - name: Install libgcc
 #   become: true

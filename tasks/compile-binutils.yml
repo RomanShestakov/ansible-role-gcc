@@ -10,7 +10,7 @@
 
 - name: Configure binutils
   become: true
-  shell: chdir={{binutils_build}} ./configure --prefix={{gcc_install_dir}} --disable-nls --disable-werror
+  shell: chdir={{binutils_build}} ./configure --prefix={{binutils_install_dir}} --disable-nls --disable-werror
   when: binutils_downloaded.changed
 
 - name: Make binutils
