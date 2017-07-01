@@ -74,7 +74,16 @@
 
 - name: Configure GCC
   become: true
-  shell: chdir={{gcc_build_dir}} {{gcc_build}}/configure --prefix={{gcc_install_dir}} --disable-nls --enable-languages=c,c++ --disable-multilib --with-gmp="{{gmp_build}}" --with-mpfr="{{mpfr_build}}" --with-mpc="{{mpc_build}}"
+  shell: chdir={{gcc_build_dir}} {{gcc_build}}/configure \
+    --prefix={{gcc_install_dir}} \
+    --disable-shared \
+    --enable-static \
+    --disable-nls \
+    --enable-languages=c,c++ \
+    --disable-multilib \
+    --with-gmp={{gmp_build}} \
+    --with-mpfr={{mpfr_build}} \
+    --with-mpc={{mpc_build}}
 
 - name: Make GCC
   become: true
