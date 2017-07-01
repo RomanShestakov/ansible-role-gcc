@@ -11,93 +11,92 @@
   file: path={{gcc_build_dir}} state=directory
 
 
-#### GMP
-- name: Get GMP
-  become: true
-  get_url: url={{gmp_url}} dest={{gmp_tmp}} timeout=180
-  # register: gmp_downloaded
-
-- name: Make GMP build folder
-  become: true
-  file: path={{gmp_build_dir}} state=directory
-  # when: gmp_downloaded.changed
-
-- name: Extract GMP sources
-  become: true
-  unarchive: src={{gmp_tmp}} dest=/tmp remote_src=yes
-  # when: gmp_downloaded.changed
-
-- name: Configure GMP
-  become: true
-  shell: chdir={{gmp_build_dir}} ./configure --prefix={{gcc_install_dir}}
-  # when: gmp_downloaded.changed
-
-- name: Make GMP
-  become: true
-  shell: chdir={{gmp_build_dir}} make && make check && make install
- #  when: gmp_downloaded.changed
-  #############
-
-
-#### MPFR
-- name: Get MPFR
-  become: true
-  get_url: url={{mpfr_url}} dest={{mpfr_tmp}} timeout=180
-  # register: mpfr_downloaded
-
-- name: Make MPFR build folder
-  become: true
-  file: path={{mpfr_build_dir}} state=directory
-  # when: mpfr_downloaded.changed
-
-- name: Extract MPFR sources
-  become: true
-  unarchive: src={{mpfr_tmp}} dest=/tmp remote_src=yes
-  # when: mpfr_downloaded.changed
-
-- name: Configure MPFR
-  become: true
-  shell: chdir={{mpfr_build_dir}} ./configure --prefix={{gcc_build_dir}} --with-gmp={{gcc_install_dir}}
-  # when: mpfr_downloaded.changed
-
-- name: Make MPFR
-  become: true
-  shell: chdir={{mpfr_build_dir}} make && make check && make install
-  # when: mpfr_downloaded.changed
-##############
-
-
-#### MPC
-- name: Get MPC
-  become: true
-  get_url: url={{mpc_url}} dest={{mpc_tmp}} timeout=180
-  # register: mpc_downloaded
-
-- name: Make MPC build folder
-  become: true
-  file: path={{mpc_build_dir}} state=directory
-  # when: mpc_downloaded.changed
-
-- name: Extract MPC sources
-  become: true
-  unarchive: src={{mpc_tmp}} dest=/tmp remote_src=yes
-  # when: mpc_downloaded.changed
-
-- name: Configure MPC
-  become: true
-  shell: chdir={{mpc_build_dir}} ./configure --prefix={{gcc_install_dir}} --with-gmp={{gcc_install_dir}} --with-mpfr={{gcc_install_dir}}
-  # when: mpc_downloaded.changed
-
-- name: Make MPC
-  become: true
-  shell: chdir={{mpc_build_dir}} make && make check && make install
-  # when: mpc_downloaded.changed
-##############
-
-
-# - name: Download GMP MPFR and MPC
+# #### GMP
+# - name: Get GMP
 #   become: true
-#   shell: chdir={{gcc_build}} ./contrib/download_prerequisites
+#   get_url: url={{gmp_url}} dest={{gmp_tmp}} timeout=180
+#   # register: gmp_downloaded
+
+# - name: Make GMP build folder
+#   become: true
+#   file: path={{gmp_build_dir}} state=directory
+#   # when: gmp_downloaded.changed
+
+# - name: Extract GMP sources
+#   become: true
+#   unarchive: src={{gmp_tmp}} dest=/tmp remote_src=yes
+#   # when: gmp_downloaded.changed
+
+# - name: Configure GMP
+#   become: true
+#   shell: chdir={{gmp_build_dir}} ./configure --prefix={{gcc_install_dir}}
+#   # when: gmp_downloaded.changed
+
+# - name: Make GMP
+#   become: true
+#   shell: chdir={{gmp_build_dir}} make && make check && make install
+#  #  when: gmp_downloaded.changed
+#   #############
+
+
+# #### MPFR
+# - name: Get MPFR
+#   become: true
+#   get_url: url={{mpfr_url}} dest={{mpfr_tmp}} timeout=180
+#   # register: mpfr_downloaded
+
+# - name: Make MPFR build folder
+#   become: true
+#   file: path={{mpfr_build_dir}} state=directory
+#   # when: mpfr_downloaded.changed
+
+# - name: Extract MPFR sources
+#   become: true
+#   unarchive: src={{mpfr_tmp}} dest=/tmp remote_src=yes
+#   # when: mpfr_downloaded.changed
+
+# - name: Configure MPFR
+#   become: true
+#   shell: chdir={{mpfr_build_dir}} ./configure --prefix={{gcc_build_dir}} --with-gmp={{gcc_install_dir}}
+#   # when: mpfr_downloaded.changed
+
+# - name: Make MPFR
+#   become: true
+#   shell: chdir={{mpfr_build_dir}} make && make check && make install
+#   # when: mpfr_downloaded.changed
+# ##############
+
+
+# #### MPC
+# - name: Get MPC
+#   become: true
+#   get_url: url={{mpc_url}} dest={{mpc_tmp}} timeout=180
+#   # register: mpc_downloaded
+
+# - name: Make MPC build folder
+#   become: true
+#   file: path={{mpc_build_dir}} state=directory
+#   # when: mpc_downloaded.changed
+
+# - name: Extract MPC sources
+#   become: true
+#   unarchive: src={{mpc_tmp}} dest=/tmp remote_src=yes
+#   # when: mpc_downloaded.changed
+
+# - name: Configure MPC
+#   become: true
+#   shell: chdir={{mpc_build_dir}} ./configure --prefix={{gcc_install_dir}} --with-gmp={{gcc_install_dir}} --with-mpfr={{gcc_install_dir}}
+#   # when: mpc_downloaded.changed
+
+# - name: Make MPC
+#   become: true
+#   shell: chdir={{mpc_build_dir}} make && make check && make install
+#   # when: mpc_downloaded.changed
+# ##############
+
+- name: Download GMP MPFR and MPC
+  become: true
+  shell: chdir={{gcc_build}} ./contrib/download_prerequisites
 
 - name: Configure GCC
   become: true
@@ -105,10 +104,10 @@
     --prefix={{gcc_install_dir}} \
     --disable-nls \
     --enable-languages=c,c++ \
-    --disable-multilib \
-    --with-gmp={{gcc_install_dir}} \
-    --with-mpfr={{gcc_install_dir}} \
-    --with-mpc={{gcc_install_dir}}
+    --disable-multilib
+    # --with-gmp={{gcc_install_dir}} \
+    # --with-mpfr={{gcc_install_dir}} \
+    # --with-mpc={{gcc_install_dir}}
 
 - name: Make GCC
   become: true
