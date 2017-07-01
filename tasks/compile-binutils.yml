@@ -1,6 +1,6 @@
 - name: Get binutils sources
   become: true
-  get_url: url={{binutils_url}} dest={{binutils_tmp}} timeout=60
+  get_url: url={{binutils_url}} dest={{binutils_tmp}} timeout=180
   register: binutils_downloaded
 
 - name: Extract binutils sources
