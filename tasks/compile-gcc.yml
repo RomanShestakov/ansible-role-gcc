@@ -29,7 +29,7 @@
 
 - name: Configure GMP
   become: true
-  shell: chdir={{gmp_build_dir}} ./configure --prefix={{gcc_install_dir}} --disable-shared  --enable-static
+  shell: chdir={{gmp_build_dir}} ./configure --prefix={{gcc_install_dir}}
   # when: gmp_downloaded.changed
 
 - name: Make GMP
@@ -57,7 +57,7 @@
 
 - name: Configure MPFR
   become: true
-  shell: chdir={{mpfr_build_dir}} ./configure --prefix={{gcc_build_dir}} --disable-shared  --enable-static --with-gmp={{gcc_install_dir}}
+  shell: chdir={{mpfr_build_dir}} ./configure --prefix={{gcc_build_dir}} --with-gmp={{gcc_install_dir}}
   # when: mpfr_downloaded.changed
 
 - name: Make MPFR
@@ -85,7 +85,7 @@
 
 - name: Configure MPC
   become: true
-  shell: chdir={{mpc_build_dir}} ./configure --prefix={{gcc_install_dir}} --disable-shared  --enable-static --with-gmp={{gcc_install_dir}} --with-mpfr={{gcc_install_dir}}
+  shell: chdir={{mpc_build_dir}} ./configure --prefix={{gcc_install_dir}} --with-gmp={{gcc_install_dir}} --with-mpfr={{gcc_install_dir}}
   # when: mpc_downloaded.changed
 
 - name: Make MPC
@@ -103,8 +103,6 @@
   become: true
   shell: chdir={{gcc_build_dir}} ./configure \
     --prefix={{gcc_install_dir}} \
-    --disable-shared \
-    --enable-static \
     --disable-nls \
     --enable-languages=c,c++ \
     --disable-multilib \
