@@ -16,17 +16,17 @@ gcc_build_dir: "/tmp/gcc-{{gcc_version}}-build"
 gcc_install_dir: "/opt/gcc-{{gcc_version}}"
 
 # GMP
-gmp_version: 4.3.2
+gmp_version: 6.1.2
 gmp_url: "https://gmplib.org/download/gmp/gmp-{{gmp_version}}.tar.bz2"
 gmp_tmp: "/tmp/gmp-{{gmp_version}}.tar.bz2"
 
 # MPC
-mpc_version: 0.8.1
+mpc_version: 1.0.3
 mpc_url: "http://www.multiprecision.org/mpc/download/mpc-{{mpc_version}}.tar.gz"
 mpc_tmp: "/tmp/mpc-{{mpc_version}}.tar.gz"
 
 # MPFR
-mpfr_version: 2.4.2
+mpfr_version: 3.1.5
 mpfr_url: "http://www.mpfr.org/mpfr-2.4.2/mpfr-{{mpfr_version}}.tar.bz2"
 mpfr_tmp: "/tmp/mpfr-{{mpfr_version}}.tar.bz2"
 
