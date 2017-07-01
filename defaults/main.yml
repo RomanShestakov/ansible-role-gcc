@@ -1,12 +1,5 @@
 # file: meta/main.yml
 
-
-# Binutils
-binutils_version: 2.24
-binutils_url: "http://ftp.gnu.org/gnu/binutils/binutils-{{binutils_version}}.tar.gz"
-binutils_tmp: "/tmp/binutils-{{binutils_version}}.tar.gz"
-binutils_build: "/tmp/binutils-{{binutils_version}}"
-
 # GCC
 gcc_version: 6.3.0
 gcc_url: "ftp://ftp.fu-berlin.de/unix/languages/gcc/releases/gcc-{{gcc_version}}/gcc-{{gcc_version}}.tar.gz"
@@ -15,32 +8,9 @@ gcc_build: "/tmp/gcc-{{gcc_version}}"
 gcc_build_dir: "/tmp/gcc-{{gcc_version}}-build"
 gcc_install_dir: "/opt/gcc-{{gcc_version}}"
 
-# GMP
-gmp_version: 6.1.2
-gmp_url: "https://gmplib.org/download/gmp/gmp-{{gmp_version}}.tar.bz2"
-gmp_tmp: "/tmp/gmp-{{gmp_version}}.tar.bz2"
-gmp_build_dir: "/tmp/gmp-{{gmp_version}}"
-
-# MPC
-mpc_version: 1.0.3
-mpc_url: "http://www.multiprecision.org/mpc/download/mpc-{{mpc_version}}.tar.gz"
-mpc_tmp: "/tmp/mpc-{{mpc_version}}.tar.gz"
-mpc_build_dir: "/tmp/mpc-{{mpc_version}}"
-
-# MPFR
-mpfr_version: 3.1.5
-mpfr_url: "http://www.mpfr.org/mpfr-{{mpfr_version}}/mpfr-{{mpfr_version}}.tar.bz2"
-mpfr_tmp: "/tmp/mpfr-{{mpfr_version}}.tar.bz2"
-mpfr_build_dir: "/tmp/mpfr-{{mpfr_version}}"
-
-# # Cloog
-# cloog_version: 0.18.1
-# cloog_url: "ftp://gcc.gnu.org/pub/gcc/infrastructure/cloog-{{cloog_version}}.tar.gz"
-# cloog_tmp: "/tmp/cloog-{{cloog_version}}.tar.gz"
-# cloog_build: "/tmp/cloog-{{cloog_version}}"
-
-# # ISL
-# isl_version: 0.12.2
-# isl_url: "ftp://gcc.gnu.org/pub/gcc/infrastructure/isl-{{isl_version}}.tar.bz2"
-# isl_tmp: "/tmp/isl-{{isl_version}}.tar.bz2"
-# isl_build: "/tmp/isl-{{isl_version}}"
+# Binutils
+binutils_version: 2.24
+binutils_url: "http://ftp.gnu.org/gnu/binutils/binutils-{{binutils_version}}.tar.gz"
+binutils_tmp: "/tmp/binutils-{{binutils_version}}.tar.gz"
+binutils_build: "/tmp/binutils-{{binutils_version}}"
+binutils_install_dir: {{gcc_install_dir}}
