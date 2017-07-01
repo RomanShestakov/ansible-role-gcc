@@ -39,31 +39,31 @@
 ##############
 
 
-#### GMFR
-- name: Get GMFR
+#### MPFR
+- name: Get MPFR
   become: true
-  get_url: url={{gmfr_url}} dest={{gmfr_tmp}} timeout=180
-  register: gmfr_downloaded
+  get_url: url={{mpfr_url}} dest={{mpfr_tmp}} timeout=180
+  register: mpfr_downloaded
 
-- name: Make GMFR build folder
+- name: Make MPFR build folder
   become: true
-  file: path={{gmfr_build_dir}} state=directory
-  when: gmfr_downloaded.changed
+  file: path={{mpfr_build_dir}} state=directory
+  when: mpfr_downloaded.changed
 
-- name: Extract GMFR sources
+- name: Extract MPFR sources
   become: true
-  unarchive: src={{gmfr_tmp}} dest={{gmfr_build_dir}} remote_src=yes
-  when: gmfr_downloaded.changed
+  unarchive: src={{mpfr_tmp}} dest={{mpfr_build_dir}} remote_src=yes
+  when: mpfr_downloaded.changed
 
-- name: Configure GMFR
+- name: Configure MPFR
   become: true
-  shell: chdir={{gmfr_build_dir}} ./configure --prefix={{gcc_build_dir}} --disable-shared  --enable-static --with-gmp={{gcc_build_dir}}
-  when: gmp_downloaded.changed
+  shell: chdir={{mpfr_build_dir}} ./configure --prefix={{gcc_build_dir}} --disable-shared  --enable-static --with-gmp={{gcc_build_dir}}
+  when: mpfr_downloaded.changed
 
-- name: Make GMFR
+- name: Make MPFR
   become: true
-  shell: chdir={{gmfr_build_dir}} make && make check && make install
-  when: gmfr_downloaded.changed
+  shell: chdir={{mpfr_build_dir}} make && make check && make install
+  when: mpfr_downloaded.changed
 ##############
 
 
@@ -85,7 +85,7 @@
 
 - name: Configure MPC
   become: true
-  shell: chdir={{mpc_build_dir}} ./configure --prefix={{gcc_build_dir}} --disable-shared  --enable-static --with-gmp={{gcc_build_dir}} --with-gmfr={{gcc_build_dir}}
+  shell: chdir={{mpc_build_dir}} ./configure --prefix={{gcc_build_dir}} --disable-shared  --enable-static --with-gmp={{gcc_build_dir}} --with-mpfr={{gcc_build_dir}}
   when: mpc_downloaded.changed
 
 - name: Make MPC
