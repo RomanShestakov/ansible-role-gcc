@@ -13,4 +13,4 @@ binutils_version: 2.24
 binutils_url: "http://ftp.gnu.org/gnu/binutils/binutils-{{binutils_version}}.tar.gz"
 binutils_tmp: "/tmp/binutils-{{binutils_version}}.tar.gz"
 binutils_build: "/tmp/binutils-{{binutils_version}}"
-binutils_install_dir: {{gcc_install_dir}}
+binutils_install_dir: "{{gcc_install_dir}}"
