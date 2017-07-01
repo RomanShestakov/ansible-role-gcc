@@ -27,7 +27,7 @@ mpc_tmp: "/tmp/mpc-{{mpc_version}}.tar.gz"
 
 # MPFR
 mpfr_version: 3.1.5
-mpfr_url: "http://www.mpfr.org/mpfr-2.4.2/mpfr-{{mpfr_version}}.tar.bz2"
+mpfr_url: "http://www.mpfr.org/mpfr-{{mpfr_version}}.tar.bz2"
 mpfr_tmp: "/tmp/mpfr-{{mpfr_version}}.tar.bz2"
 
 # Cloog
