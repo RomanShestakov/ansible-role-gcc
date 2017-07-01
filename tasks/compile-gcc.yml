@@ -16,7 +16,7 @@
 
 - name: Extract GMP sources
   become: true
-  unarchive: src={{gmp_tmp}} dest="{{gmp_build}}" remote_src=yes
+  unarchive: src={{gmp_tmp}} dest="/tmp" remote_src=yes
 
 - name: Get MPC
   become: true
@@ -24,7 +24,7 @@
 
 - name: Extract GMP sources
   become: true
-  unarchive: src={{mpc_tmp}} dest="{{gmp_build}}" remote_src=yes
+  unarchive: src={{mpc_tmp}} dest="/tmp" remote_src=yes
 
 - name: Get MPFR
   become: true
@@ -32,23 +32,23 @@
 
 - name: Extract MPFR sources
   become: true
-  unarchive: src={{mpfr_tmp}} dest="{{mpfr_build}}" remote_src=yes
+  unarchive: src={{mpfr_tmp}} dest="/tmp" remote_src=yes
 
-- name: Get Cloog
-  become: true
-  get_url: url={{cloog_url}} dest={{cloog_tmp}} timeout=180
+# - name: Get Cloog
+#   become: true
+#   get_url: url={{cloog_url}} dest={{cloog_tmp}} timeout=180
 
-- name: Extract Cloog sources
-  become: true
-  unarchive: src={{cloog_tmp}} dest="{{cloog_build}}" remote_src=yes
+# - name: Extract Cloog sources
+#   become: true
+#   unarchive: src={{cloog_tmp}} dest="{{cloog_build}}" remote_src=yes
 
-- name: Get ISL
-  become: true
-  get_url: url={{isl_url}} dest={{isl_tmp}} timeout=180
+# - name: Get ISL
+#   become: true
+#   get_url: url={{isl_url}} dest={{isl_tmp}} timeout=180
 
-- name: Extract ISL sources
-  become: true
-  unarchive: src={{isl_tmp}} dest="{{isl_build}}" remote_src=yes
+# - name: Extract ISL sources
+#   become: true
+#   unarchive: src={{isl_tmp}} dest="{{isl_build}}" remote_src=yes
 
 
 # - name: Extract MPFR sources
