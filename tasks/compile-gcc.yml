@@ -10,14 +10,33 @@
   become: true
   file: path={{gcc_build_dir}} state=directory
 
+
+#### GMP
 - name: Get GMP
   become: true
   get_url: url={{gmp_url}} dest={{gmp_tmp}} timeout=180
 
+- name: Make GMP build folder
+  become: true
+  file: path={{gmp_build_dir}} state=directory
+
 - name: Extract GMP sources
   become: true
-  unarchive: src={{gmp_tmp}} dest="/tmp" remote_src=yes
+  unarchive: src={{gmp_tmp}} dest={{gmp_build_dir}} remote_src=yes
 
+- name: Configure GMP
+  become: true
+  shell: chdir={{gmp_build_dir}} configure \
+    --prefix={{gcc_build_dir}} \
+    --disable-shared \
+    --enable-static \
+
+- name: Make GMP
+  become: true
+  shell: chdir={{gmp_build_dir}} make && make check && make install
+
+
+####### MPC
 - name: Get MPC
   become: true
   get_url: url={{mpc_url}} dest={{mpc_tmp}} timeout=180
