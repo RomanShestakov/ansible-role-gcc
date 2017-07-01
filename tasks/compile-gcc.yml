@@ -1,18 +1,22 @@
 - name: Get GCC sources
   become: true
   get_url: url={{gcc_url}} dest={{gcc_tmp}} timeout=180
+  register: gcc_downloaded
 
 - name: Extract GCC sources
   become: true
   unarchive: src={{gcc_tmp}} dest="/tmp" creates={{gcc_build}} remote_src=yes
+  when: gcc_downloaded.changed
 
 - name: Make gcc build folder
   become: true
   file: path={{gcc_build_dir}} state=directory
+  when: gcc_downloaded.changed
 
 - name: Download GMP MPFR and MPC
   become: true
   shell: chdir={{gcc_build}} ./contrib/download_prerequisites
+  when: gcc_downloaded.changed
 
 - name: Configure GCC
   become: true
@@ -24,12 +28,12 @@
     # --with-gmp={{gcc_install_dir}} \
     # --with-mpfr={{gcc_install_dir}} \
     # --with-mpc={{gcc_install_dir}}
+  when: gcc_downloaded.changed
 
 - name: Make GCC
   become: true
   shell: chdir={{gcc_build_dir}} make all-gcc
-  # register: command_result
-  # ignore_errors: True
+  when: gcc_downloaded.changed
 
 # - name: Make libgcc
 #   become: true
@@ -38,6 +42,7 @@
 - name: Install GCC
   become: true
   shell: chdir={{gcc_build_dir}} make install-gcc
+  when: gcc_downloaded.changed
 
 # - name: Install libgcc
 #   become: true
