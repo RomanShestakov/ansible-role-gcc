@@ -1,15 +1,17 @@
-- name: Get GCC sources
-  become: true
-  get_url: url={{gcc_url}} dest={{gcc_tmp}} timeout=180
-  register: gcc_downloaded
+# - name: Get GCC sources
+#   become: true
+#   get_url: url={{gcc_url}} dest={{gcc_tmp}} timeout=180
+#   register: gcc_downloaded
 
-- name: Extract GCC sources
+- name: Get and Extract GCC sources
   become: true
-  unarchive: src={{gcc_tmp}}
+  unarchive: src={{gcc_url}}
              dest="/tmp"
-             creates={{gcc_build}}
-             remote_src=yes
-  when: gcc_downloaded.changed
+             copy=no
+             # creates={{gcc_build}}
+             # remote_src=yes
+  # when: gcc_downloaded.changed
+  register: gcc_downloaded
 
 - name: Make gcc build folder
   become: true
