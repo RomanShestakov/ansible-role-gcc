@@ -5,7 +5,10 @@
 
 - name: Extract GCC sources
   become: true
-  unarchive: src={{gcc_tmp}} dest="/tmp" creates={{gcc_build}} remote_src=yes
+  unarchive: src={{gcc_tmp}}
+             dest="/tmp"
+             creates={{gcc_build}}
+             remote_src=yes
   when: gcc_downloaded.changed
 
 - name: Make gcc build folder
