@@ -1,6 +1,6 @@
 - name: Get GCC sources
   become: true
-  get_url: url={{gcc_url}} dest={{gcc_tmp}} timeout=180
+  get_url: url={{gcc_url}} dest={{gcc_tmp}} timeout=180 update=no
   register: gcc_downloaded
 
 # - name: Get and Extract GCC sources
