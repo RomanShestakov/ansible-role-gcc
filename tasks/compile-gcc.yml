@@ -33,7 +33,7 @@
       regexp='M4=m4-not-required'
       replace='M4=m4'
       backup=yes
-  when: {{gcc_version}} < 5.0.1
+  # when: {{gcc_version}} < 5.0.1
 
 - name: Make gcc build folder
   become: true
