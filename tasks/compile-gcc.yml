@@ -21,14 +21,23 @@
              remote_src=yes
   when: gcc_downloaded.changed
 
-- name: Make gcc build folder
-  become: true
-  file: path={{gcc_build_dir}} state=directory
-  when: gcc_downloaded.changed
-
 - name: Download GMP MPFR and MPC
   become: true
   shell: chdir={{gcc_build}} ./contrib/download_prerequisites
+  when: gcc_downloaded.changed
+
+- name: Patch GMP bug
+  become: true
+  replace:
+      path={{gcc_build}}/gmp/configure.in
+      regexp='M4=m4-not-required'
+      replace='M4=m4'
+      backup=yes
+  when: {{gcc_version}} < 5.0.1
+
+- name: Make gcc build folder
+  become: true
+  file: path={{gcc_build_dir}} state=directory
   when: gcc_downloaded.changed
 
 - name: Configure GCC
