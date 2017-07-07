@@ -30,7 +30,7 @@
   become: true
   replace:
       path={{gcc_build}}/gmp/configure.in
-      regexp='M4=m4-not-required'
+      regexp='M4=m4-not-needed'
       replace='M4=m4'
       backup=yes
   # when: {{gcc_version}} < 5.0.1
