@@ -27,8 +27,15 @@
       path={{gcc_build}}/gmp/configure.in
       regexp='M4=m4-not-needed'
       replace='M4=m4'
-      backup=yes
-  # when: {{gcc_version}} < 5.0.1
+      backup=no
+
+- name: Patch GMP bug 2
+  become: true
+  replace:
+      path={{gcc_build}}/gmp/configure
+      regexp='M4=m4-not-needed'
+      replace='M4=m4'
+      backup=no
 
 - name: Make gcc build folder
   become: true
