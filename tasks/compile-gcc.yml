@@ -24,7 +24,7 @@
 - name: Patch GMP bug
   become: true
   replace:
-      path={{gcc_build}}/gmp/{item}
+      path={{gcc_build}}/gmp/{{item}}
       regexp='M4=m4-not-needed'
       replace='M4=m4'
       backup=no
