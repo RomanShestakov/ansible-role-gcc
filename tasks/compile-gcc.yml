@@ -14,33 +14,28 @@
              dest="/tmp"
              creates={{gcc_build}}
              remote_src=yes
-  # when: gcc_downloaded.changed
+  when: gcc_downloaded.changed
 
 - name: Download GMP MPFR and MPC
   become: true
   shell: chdir={{gcc_build}} ./contrib/download_prerequisites
-  # when: gcc_downloaded.changed
+  when: gcc_downloaded.changed
 
 - name: Patch GMP bug
   become: true
   replace:
-      path={{gcc_build}}/gmp/configure.in
+      path={{gcc_build}}/gmp/{item}
       regexp='M4=m4-not-needed'
       replace='M4=m4'
       backup=no
-
-- name: Patch GMP bug 2
-  become: true
-  replace:
-      path={{gcc_build}}/gmp/configure
-      regexp='M4=m4-not-needed'
-      replace='M4=m4'
-      backup=no
+  with_items:
+  - configure
+  - configure.in
 
 - name: Make gcc build folder
   become: true
   file: path={{gcc_build_dir}} state=directory
-  # when: gcc_downloaded.changed
+  when: gcc_downloaded.changed
 
 - name: Configure GCC
   become: true
@@ -49,17 +44,17 @@
     --disable-nls \
     --enable-languages=c,c++ \
     --disable-multilib
-  # when: gcc_downloaded.changed
+  when: gcc_downloaded.changed
 
 - name: Make GCC
   become: true
   shell: chdir={{gcc_build_dir}} make
-  # when: gcc_downloaded.changed
+  when: gcc_downloaded.changed
 
 - name: Install GCC
   become: true
   shell: chdir={{gcc_build_dir}} make install
-  # when: gcc_downloaded.changed
+  when: gcc_downloaded.changed
 
 # - name: Make libgcc
 #   become: true
