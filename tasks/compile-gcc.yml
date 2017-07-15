@@ -3,12 +3,12 @@
 ## https://liblfds.org/mediawiki/index.php?title=Building_GCC
 ## https://gmplib.org/list-archives/gmp-bugs/2010-December/002140.html
 
-- name: Get GCC sources
+- name: GCC | Get GCC sources
   become: true
   get_url: url={{gcc_url}} dest={{gcc_tmp}} timeout=180 force=no
   register: gcc_downloaded
 
-- name: Extract GCC sources
+- name: GCC | Extract GCC sources
   become: true
   unarchive: src={{gcc_tmp}}
              dest="/tmp"
@@ -16,12 +16,12 @@
              remote_src=yes
   when: gcc_downloaded.changed
 
-- name: Download GMP MPFR and MPC
+- name: GCC | Download GMP MPFR and MPC
   become: true
   shell: chdir={{gcc_build}} ./contrib/download_prerequisites
   when: gcc_downloaded.changed
 
-- name: Patch GMP bug
+- name: GCC | Patch GMP bug
   become: true
   replace:
       path={{gcc_build}}/gmp/{{item}}
@@ -32,12 +32,12 @@
   - configure
   - configure.in
 
-- name: Make gcc build folder
+- name: GCC | Make build folder
   become: true
   file: path={{gcc_build_dir}} state=directory
   when: gcc_downloaded.changed
 
-- name: Configure GCC
+- name: GCC | Configure
   become: true
   shell: chdir={{gcc_build_dir}} {{gcc_build}}/configure \
     --prefix={{gcc_install_dir}} \
@@ -46,15 +46,27 @@
     --disable-multilib
   when: gcc_downloaded.changed
 
-- name: Make GCC
+- name: GCC | Make
   become: true
   shell: chdir={{gcc_build_dir}} make
   when: gcc_downloaded.changed
 
-- name: Install GCC
+- name: GCC | Install
   become: true
   shell: chdir={{gcc_build_dir}} make install
   when: gcc_downloaded.changed
+
+- name: GCC | add path to /etc/ld.so.conf.d/
+  become: true
+  action: template src=gcc.conf-template.j2
+          dest="/etc/ld.so.conf.d/gcc-{{gcc_version}}.conf"
+          mode=0775
+  # when: rtags_downloaded.changed
+
+- name: GCC | run ldconfig
+  become: true
+  shell: ldconfig
+  #when: gcc_downloaded.changed
 
 # - name: Make libgcc
 #   become: true
