@@ -60,7 +60,7 @@
   become: true
   action: template src=gcc.conf-template.j2
           dest="/etc/ld.so.conf.d/gcc-{{gcc_version}}.conf"
-          mode=0775
+          mode=0644
   # when: rtags_downloaded.changed
 
 - name: GCC | run ldconfig
