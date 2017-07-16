@@ -10,17 +10,17 @@
   unarchive: src={{gdb_tmp}} dest="/tmp" creates={{gdb_build}} remote_src=yes
   when: gdb_downloaded.changed
 
-- name: GDB | Configure binutils
+- name: GDB | Configure
   become: true
   shell: chdir={{gdb_build}} ./configure --prefix={{gdb_install_dir}} --disable-nls --disable-werror
   when: gdb_downloaded.changed
 
-- name: GDB | Make binutils
+- name: GDB | Make
   become: true
   shell: chdir={{gdb_build}} make
   when: gdb_downloaded.changed
 
-- name: GDB | Install binutils
+- name: GDB | Install
   become: true
   shell: chdir={{gdb_build}} make install
   when: gdb_downloaded.changed
