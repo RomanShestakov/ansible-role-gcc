@@ -1,19 +1,5 @@
 # tasks/main.yml
 
 - include: 'compile-binutils.yml'
+- include: 'compile-gdb.yml'
 - include: 'compile-gcc.yml'
-
-# - name: Install GCC and Clang
-#   yum:
-#     name: "{{ item }}"
-#     state: present
-#   with_items:
-#   - gcc
-#   - gcc-c++
-#   - llvm-devel
-#   - clang-devel
-#   - make
-#   - htop
-#   - strace
-#   - openssl-devel
-#   # when: ansible_os_family == "Centos"

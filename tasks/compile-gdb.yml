@@ -1,0 +1,26 @@
+# https://www.vultr.com/docs/how-to-install-gdb-on-centos-6
+
+- name: GDB | get sources
+  become: true
+  get_url: url={{gdb_url}} dest={{gdb_tmp}} timeout=180
+  register: gdb_downloaded
+
+- name: GDB | Extract sources
+  become: true
+  unarchive: src={{gdb_tmp}} dest="/tmp" creates={{gdb_build}} remote_src=yes
+  when: gdb_downloaded.changed
+
+- name: GDB | Configure binutils
+  become: true
+  shell: chdir={{gdb_build}} ./configure --prefix={{gdb_install_dir}} --disable-nls --disable-werror
+  when: gdb_downloaded.changed
+
+- name: GDB | Make binutils
+  become: true
+  shell: chdir={{gdb_build}} make
+  when: gdb_downloaded.changed
+
+- name: GDB | Install binutils
+  become: true
+  shell: chdir={{gdb_build}} make install
+  when: gdb_downloaded.changed
