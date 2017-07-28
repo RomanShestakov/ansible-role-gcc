@@ -16,7 +16,7 @@ binutils_build: "/tmp/binutils-{{binutils_version}}"
 binutils_install_dir: "{{gcc_install_dir}}"
 
 # GDB
-gdb_version: 8.0
+gdb_version: 7.9.1
 gdb_url: "http://ftp.gnu.org/gnu/gdb/gdb-{{gdb_version}}.tar.gz"
 gdb_tmp: "/tmp/gdb-{{gdb_version}}.tar.gz"
 gdb_build: "/tmp/gdb-{{gdb_version}}"

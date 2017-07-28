@@ -56,17 +56,17 @@
   shell: chdir={{gcc_build_dir}} make install
   when: gcc_downloaded.changed
 
-- name: GCC | add path to /etc/ld.so.conf.d/
-  become: true
-  action: template src=gcc.conf-template.j2
-          dest="/etc/ld.so.conf.d/gcc-{{gcc_version}}.conf"
-          mode=0644
-  # when: rtags_downloaded.changed
+# - name: GCC | add path to /etc/ld.so.conf.d/
+#   become: true
+#   action: template src=gcc.conf-template.j2
+#           dest="/etc/ld.so.conf.d/gcc-{{gcc_version}}.conf"
+#           mode=0644
+#   # when: rtags_downloaded.changed
 
-- name: GCC | run ldconfig
-  become: true
-  shell: ldconfig
-  #when: gcc_downloaded.changed
+# - name: GCC | run ldconfig
+#   become: true
+#   shell: ldconfig
+#   #when: gcc_downloaded.changed
 
 # - name: Make libgcc
 #   become: true

@@ -12,7 +12,11 @@
 
 - name: GDB | Configure
   become: true
-  shell: chdir={{gdb_build}} ./configure --prefix={{gdb_install_dir}} --disable-nls --disable-werror
+  shell: chdir={{gdb_build}} \
+              ./configure \
+              --with-python=yes \
+              --prefix={{gdb_install_dir}} \
+              --disable-werror
   when: gdb_downloaded.changed
 
 - name: GDB | Make
