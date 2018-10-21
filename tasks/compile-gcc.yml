@@ -6,10 +6,7 @@
 - name: GCC | Get GCC sources
   become: true
   get_url: url={{gcc_url}} dest={{gcc_tmp}} timeout=180 force=no
-  retries: 3
-  delay: 3
   register: gcc_downloaded
-  until: gcc_downloaded.rc == 0
 
 - name: GCC | Extract GCC sources
   become: true
@@ -22,10 +19,6 @@
 - name: GCC | Download GMP MPFR and MPC
   become: true
   shell: chdir={{gcc_build}} ./contrib/download_prerequisites
-  retries: 3
-  delay: 3
-  register: result
-  until: result.rc == 0
   when: gcc_downloaded.changed
 
 - name: GCC | Patch GMP bug
