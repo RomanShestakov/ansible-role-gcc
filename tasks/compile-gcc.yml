@@ -31,7 +31,7 @@
   with_items:
   - configure
   - configure.in
-  when: {{patch_gmp_bug}} == true
+  when: patch_gmp_bug == true
 
 - name: GCC | Make build folder
   become: true
