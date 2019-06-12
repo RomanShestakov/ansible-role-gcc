@@ -7,6 +7,7 @@ gcc_tmp: "/tmp/gcc-{{gcc_version}}.tar.gz"
 gcc_build: "/tmp/gcc-{{gcc_version}}"
 gcc_build_dir: "/tmp/gcc-{{gcc_version}}-build"
 gcc_install_dir: "/opt/gcc-{{gcc_version}}"
+patch_gmp_bug: true
 
 # Binutils
 binutils_version: 2.24
