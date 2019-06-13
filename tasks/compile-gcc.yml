@@ -21,9 +21,6 @@
   shell: chdir={{gcc_build}} ./contrib/download_prerequisites
   when: gcc_downloaded.changed
 
-- debug:
-  msg: "value of patch_gmp_bug: " {{patch_gmp_bug}}
-
 - name: GCC | Patch GMP bug
   become: true
   replace:
