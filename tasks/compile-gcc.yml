@@ -21,6 +21,9 @@
   shell: chdir={{gcc_build}} ./contrib/download_prerequisites
   when: gcc_downloaded.changed
 
+- debug:
+  msg: "value of patch_gmp_bug: " {{patch_gmp_bug}}
+
 - name: GCC | Patch GMP bug
   become: true
   replace:
@@ -31,7 +34,7 @@
   with_items:
   - configure
   - configure.in
-  when: patch_gmp_bug == true
+  when: patch_gmp_bug == True
 
 - name: GCC | Make build folder
   become: true
