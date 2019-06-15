@@ -3,6 +3,16 @@
 ## https://liblfds.org/mediawiki/index.php?title=Building_GCC
 ## https://gmplib.org/list-archives/gmp-bugs/2010-December/002140.html
 
+- name: GCC | clean tmp dir
+  file:
+    state: absent
+    path: "{{ gcc_tmp }}"
+
+- name: GCC | clean build dir
+  file:
+    state: absent
+    path: "{{ gcc_build }}"
+
 - name: GCC | Get GCC sources
   become: true
   get_url: url={{gcc_url}} dest={{gcc_tmp}} timeout=180 force=no
