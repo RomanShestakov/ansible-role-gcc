@@ -1,3 +1,4 @@
+---
 - name: Get binutils sources
   become: true
   get_url: url={{binutils_url}} dest={{binutils_tmp}} timeout=180
@@ -7,22 +8,27 @@
   become: true
   unarchive: src={{binutils_tmp}} dest="/tmp" creates={{binutils_build}} remote_src=yes
   when: binutils_downloaded.changed
+  register: binutils_extract
 
 - name: Configure binutils
   become: true
   shell: chdir={{binutils_build}} ./configure --prefix={{binutils_install_dir}} --disable-nls --disable-werror
-  when: binutils_downloaded.changed
+  when: binutils_extract.changed
+  register: binutils_configure
 
 - name: Make binutils
   become: true
   shell: chdir={{binutils_build}} make
-  when: binutils_downloaded.changed
+  when: binutils_configure.changed
+  register: binutils_make
 
 - name: Install binutils
   become: true
   shell: chdir={{binutils_build}} make install
-  when: binutils_downloaded.changed
+  when: binutils_make.changed
+  register: binutils_install
 
-- name: wat
-  debug: msg=ftp://ftp.fu-berlin.de/unix/languages/gcc/releases/gcc-{{gcc_version}}/gcc-{{gcc_version}}.tar.gz
-  when: binutils_downloaded.changed
+# - name: wat
+#   debug: msg=ftp://ftp.fu-berlin.de/unix/languages/gcc/releases/gcc-{{gcc_version}}/gcc-{{gcc_version}}.tar.gz
+#   when: binutils_install.changed
+...
