@@ -1,3 +1,5 @@
+---
+
 # https://www.vultr.com/docs/how-to-install-gdb-on-centos-6
 
 - name: GDB | get sources
@@ -9,6 +11,7 @@
   become: true
   unarchive: src={{gdb_tmp}} dest="/tmp" creates={{gdb_build}} remote_src=yes
   when: gdb_downloaded.changed
+  register: gdb_extract
 
 - name: GDB | Configure
   become: true
@@ -17,14 +20,17 @@
               --with-python=yes \
               --prefix={{gdb_install_dir}} \
               --disable-werror
-  when: gdb_downloaded.changed
+  when: gdb_extract.changed
+  register: gdb_configure
 
 - name: GDB | Make
   become: true
   shell: chdir={{gdb_build}} make
-  when: gdb_downloaded.changed
+  when: gdb_configure.changed
+  register: gdb_make
 
 - name: GDB | Install
   become: true
   shell: chdir={{gdb_build}} make install
-  when: gdb_downloaded.changed
+  when: gdb_make.changed
+...
