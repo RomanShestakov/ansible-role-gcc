@@ -13,9 +13,15 @@
 #     state: absent
 #     path: "{{ gcc_build }}"
 
+- name: GCC | check if source archive exists
+  command: /usr/bin/test -e {{gcc_tmp}}
+  ignore_errors: True
+  register: gcc_arch_exists
+
 - name: GCC | Get GCC sources
   become: true
   get_url: url={{gcc_url}} dest={{gcc_tmp}} timeout=180 force=no
+  when: gcc_arch_exists.rc != 0
   register: gcc_downloaded
 
 - name: GCC | Extract GCC sources
