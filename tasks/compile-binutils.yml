@@ -1,7 +1,14 @@
 ---
+
+- name: check if source archive exists
+  command: /usr/bin/test -e {{binutils_tmp}}
+  ignore_errors: True
+  register: bitutils_arch_exists
+
 - name: Get binutils sources
   become: true
   get_url: url={{binutils_url}} dest={{binutils_tmp}} timeout=180
+  when: binutils_arch_exists.rc != 0
   register: binutils_downloaded
 
 - name: Extract binutils sources
