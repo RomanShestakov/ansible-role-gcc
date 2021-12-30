@@ -5,7 +5,7 @@
 
 - name: GCC | check if install exists
   stat:
-    path: "{{ gcc_install_dir }}"
+    path: "{{ gcc_install_dir }}/bin/gcc"
   register: gcc_exists
 
 - name: GCC | Get GCC sources
