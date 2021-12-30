@@ -39,6 +39,7 @@
   become: true
   shell: chdir={{gdb_build}} make install
   when: gdb_make.changed
+  register: gdb_install
 
 - name: GDB | cleanup build
   become: true
