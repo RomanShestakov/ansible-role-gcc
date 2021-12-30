@@ -44,7 +44,7 @@
 - name: GDB | cleanup build
   become: true
   file:
-    path: "{{ gdb_build_dir }}"
+    path: "{{ gdb_build }}"
     state: absent
   when: gdb_install.changed
 
