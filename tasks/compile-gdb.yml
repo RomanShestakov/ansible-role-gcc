@@ -5,7 +5,7 @@
 - name: GDB | check if gbd was already instaled
   stat:
     path: "{{ gdb_install_dir }}/bin/gdb"
-  register: gbd_exists
+  register: gdb_exists
 
 - name: GDB | get sources
   become: true
