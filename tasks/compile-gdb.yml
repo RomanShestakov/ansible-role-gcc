@@ -2,15 +2,15 @@
 
 # https://www.vultr.com/docs/how-to-install-gdb-on-centos-6
 
-- name: GDB | check if source archive exists
-  command: /usr/bin/test -e {{gdb_tmp}}
-  ignore_errors: True
-  register: gdb_arch_exists
+- name: GDB | check if gbd was already instaled
+  stat:
+    path: "{{ gdb_install_dir }}/bin/gdb"
+  register: gbd_exists
 
 - name: GDB | get sources
   become: true
   get_url: url={{gdb_url}} dest={{gdb_tmp}} timeout=180
-  when: gdb_arch_exists.rc != 0
+  when: not gdb_exists.stat.exists
   register: gdb_downloaded
 
 - name: GDB | Extract sources
@@ -39,4 +39,18 @@
   become: true
   shell: chdir={{gdb_build}} make install
   when: gdb_make.changed
+
+- name: GDB | cleanup build
+  become: true
+  file:
+    path: "{{ gdb_build_dir }}"
+    state: absent
+  when: gdb_install.changed
+
+- name: GDB | cleanup tmp
+  become: true
+  file:
+    path: "{{ gdb_tmp }}"
+    state: absent
+  when: gdb_install.changed
 ...

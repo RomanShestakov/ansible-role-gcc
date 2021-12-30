@@ -2,7 +2,7 @@
 
 - name: check if as util was installed before
   stat:
-    path: "{{ gcc_install_dir }}/bin/as"
+    path: "{{ binutils_install_dir }}/bin/as"
   register: binutils_exists
 
 - name: Get binutils sources
