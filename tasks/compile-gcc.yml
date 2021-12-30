@@ -3,25 +3,15 @@
 ## https://liblfds.org/mediawiki/index.php?title=Building_GCC
 ## https://gmplib.org/list-archives/gmp-bugs/2010-December/002140.html
 
-# - name: GCC | clean tmp dir
-#   file:
-#     state: absent
-#     path: "{{ gcc_tmp }}"
-
-# - name: GCC | clean build dir
-#   file:
-#     state: absent
-#     path: "{{ gcc_build }}"
-
-- name: GCC | check if source archive exists
-  command: /usr/bin/test -e {{gcc_tmp}}
-  ignore_errors: True
-  register: gcc_arch_exists
+- name: GCC | check if install exists
+  stat:
+    path: "{{ gcc_install_dir }}"
+  register: gcc_exists
 
 - name: GCC | Get GCC sources
   become: true
   get_url: url={{gcc_url}} dest={{gcc_tmp}} timeout=180 force=no
-  when: gcc_arch_exists.rc != 0
+  when: not gcc_exists.stat.exists
   register: gcc_downloaded
 
 - name: GCC | Extract GCC sources
@@ -83,4 +73,19 @@
           dest="/etc/profile.d/gcc_path.sh"
           mode=0644
   when: gcc_install.changed
+
+- name: GCC | cleanup build
+  become: true
+  file:
+    path: "{{ gcc_build_dir }}"
+    state: absent
+  when: gcc_install.changed
+
+- name: GCC | cleanup tmp
+  become: true
+  file:
+    path: "{{ gcc_tmp }}"
+    state: absent
+  when: gcc_install.changed
+
 ...

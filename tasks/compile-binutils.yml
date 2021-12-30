@@ -1,14 +1,14 @@
 ---
 
-- name: check if source archive exists
-  command: /usr/bin/test -e {{binutils_tmp}}
-  ignore_errors: True
-  register: bitutils_arch_exists
+- name: check if as util was installed before
+  stat:
+    path: "{{ gcc_install_dir }}/bin/as"
+  register: binutils_exists
 
 - name: Get binutils sources
   become: true
   get_url: url={{binutils_url}} dest={{binutils_tmp}} timeout=180
-  when: binutils_arch_exists.rc != 0
+  when: not binutils_exists.stat.exists
   register: binutils_downloaded
 
 - name: Extract binutils sources
@@ -34,6 +34,20 @@
   shell: chdir={{binutils_build}} make install
   when: binutils_make.changed
   register: binutils_install
+
+- name: cleanup binutils build
+  become: true
+  file:
+    path: "{{ binutils_build }}"
+    state: absent
+  when: binutils_install.changed
+
+- name: cleanup binutils tmp
+  become: true
+  file:
+    path: "{{ binutils_tmp }}"
+    state: absent
+  when: binutils_install.changed
 
 # - name: wat
 #   debug: msg=ftp://ftp.fu-berlin.de/unix/languages/gcc/releases/gcc-{{gcc_version}}/gcc-{{gcc_version}}.tar.gz
