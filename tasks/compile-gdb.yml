@@ -23,7 +23,7 @@
   become: true
   shell: chdir={{gdb_build}} \
               ./configure \
-              --with-python=yes \
+              --with-python=no \
               --prefix={{gdb_install_dir}} \
               --disable-werror
   when: gdb_extract.changed
