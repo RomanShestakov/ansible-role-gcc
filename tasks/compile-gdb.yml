@@ -31,7 +31,7 @@
 
 - name: GDB | Make
   become: true
-  shell: chdir={{gdb_build}} make
+  shell: chdir={{gdb_build}} make -j{{gcc_number_build_jobs}}
   when: gdb_configure.changed
   register: gdb_make
 

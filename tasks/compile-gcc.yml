@@ -57,7 +57,7 @@
 
 - name: GCC | Make
   become: true
-  shell: chdir={{gcc_build_dir}} make
+  shell: chdir={{gcc_build_dir}} make -j{{gcc_number_build_jobs}}
   when: gcc_configure.changed
   register: gcc_make
 

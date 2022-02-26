@@ -1,5 +1,8 @@
 # file: meta/main.yml
 
+# how many parallel jobs to run for build
+gcc_number_build_jobs: 1
+
 # GCC
 gcc_version: 6.3.0
 gcc_url: "ftp://ftp.fu-berlin.de/unix/languages/gcc/releases/gcc-{{gcc_version}}/gcc-{{gcc_version}}.tar.gz"
